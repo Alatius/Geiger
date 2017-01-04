@@ -1,51 +1,54 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.ContextFactory = exports.Store = exports.Action = undefined;
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+var _react = require('react');
 
 var _events = require('events');
 
-'use strict';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Action = (function (_EventEmitter) {
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Action = exports.Action = function (_EventEmitter) {
+    _inherits(Action, _EventEmitter);
+
     function Action() {
         _classCallCheck(this, Action);
 
-        if (_EventEmitter != null) {
-            _EventEmitter.apply(this, arguments);
-        }
+        return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
     }
 
-    _inherits(Action, _EventEmitter);
-
     return Action;
-})(_events.EventEmitter);
+}(_events.EventEmitter);
 
-exports.Action = Action;
+var Store = exports.Store = function (_EventEmitter2) {
+    _inherits(Store, _EventEmitter2);
 
-var Store = (function (_EventEmitter2) {
     function Store() {
+        var _ref;
+
+        _classCallCheck(this, Store);
+
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        _classCallCheck(this, Store);
+        var _this2 = _possibleConstructorReturn(this, (_ref = Store.__proto__ || Object.getPrototypeOf(Store)).call.apply(_ref, [this].concat(args)));
 
-        _get(Object.getPrototypeOf(Store.prototype), 'constructor', this).apply(this, args);
-        this.dispatching = [];
-        this.waiting = [];
+        _this2.dispatching = [];
+        _this2.waiting = [];
+        return _this2;
     }
-
-    _inherits(Store, _EventEmitter2);
 
     _createClass(Store, [{
         key: 'changed',
@@ -55,11 +58,11 @@ var Store = (function (_EventEmitter2) {
     }, {
         key: 'watch',
         value: function watch(cbk) {
-            var _this = this;
+            var _this3 = this;
 
             this.on('change', cbk);
             return function () {
-                return _this.removeListener('change', cbk);
+                return _this3.removeListener('change', cbk);
             };
         }
     }, {
@@ -75,30 +78,27 @@ var Store = (function (_EventEmitter2) {
     }, {
         key: 'listen',
         value: function listen(actions, event, cbk) {
-            var _this2 = this;
+            var _this4 = this;
 
-            if (typeof actions !== 'object' || typeof actions.on !== 'function') {
+            if ((typeof actions === 'undefined' ? 'undefined' : _typeof(actions)) !== 'object' || typeof actions.on !== 'function') {
                 throw new Error('Store ' + this.constructor.name + '.listen() method expects an EventEmitter-compatible object as a first parameter.');
             }
 
             actions.on(event, function () {
-                for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                    args[_key2] = arguments[_key2];
-                }
 
                 // dispatching begins
-                _this2.dispatching.push(event);
+                _this4.dispatching.push(event);
 
-                var res = cbk.apply(undefined, args);
-                var ispromise = typeof res === 'object' && typeof res.then === 'function';
+                var res = cbk.apply(undefined, arguments);
+                var ispromise = (typeof res === 'undefined' ? 'undefined' : _typeof(res)) === 'object' && typeof res.then === 'function';
 
-                if (_this2.isWaiting() && !ispromise) {
-                    throw new Error('Store ' + _this2.constructor.name + ' waiting; action has to return the waiting promise (the promise returned by waitFor).');
+                if (_this4.isWaiting() && !ispromise) {
+                    throw new Error('Store ' + _this4.constructor.name + ' waiting; action has to return the waiting promise (the promise returned by waitFor).');
                 }
 
                 var dispatchingEnd = function dispatchingEnd() {
-                    _this2.dispatching.pop();
-                    _this2.emit('dispatching:end', event);
+                    _this4.dispatching.pop();
+                    _this4.emit('dispatching:end', event);
                     // dispatching ends
                 };
 
@@ -114,17 +114,13 @@ var Store = (function (_EventEmitter2) {
     }, {
         key: 'wait',
         value: function wait() {
-            for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-                args[_key3] = arguments[_key3];
-            }
-
             console.log('Geiger: wait() is deprecated in favour of waitFor(). Please, update your codebase.');
-            return this.waitFor.apply(this, args);
+            return this.waitFor.apply(this, arguments);
         }
     }, {
         key: 'waitFor',
         value: function waitFor(stores) {
-            var _this3 = this;
+            var _this5 = this;
 
             this.waiting.push(true);
 
@@ -141,20 +137,24 @@ var Store = (function (_EventEmitter2) {
             });
 
             return Promise.all(promises).then(function () {
-                return _this3.waiting.pop();
+                return _this5.waiting.pop();
             });
         }
     }]);
 
     return Store;
-})(_events.EventEmitter);
+}(_events.EventEmitter);
 
-exports.Store = Store;
-var ContextFactory = function ContextFactory(propTypes) {
+var ContextFactory = exports.ContextFactory = function ContextFactory(propTypes) {
+    var _class, _temp;
 
-    return (function () {
+    return _temp = _class = function (_Component) {
+        _inherits(FactoriedContext, _Component);
+
         function FactoriedContext() {
             _classCallCheck(this, FactoriedContext);
+
+            return _possibleConstructorReturn(this, (FactoriedContext.__proto__ || Object.getPrototypeOf(FactoriedContext)).apply(this, arguments));
         }
 
         _createClass(FactoriedContext, [{
@@ -171,18 +171,9 @@ var ContextFactory = function ContextFactory(propTypes) {
             value: function render() {
                 return this.props.render();
             }
-        }], [{
-            key: 'childContextTypes',
-            value: propTypes,
-            enumerable: true
-        }, {
-            key: 'propTypes',
-            value: propTypes,
-            enumerable: true
         }]);
 
         return FactoriedContext;
-    })();
+    }(_react.Component), _class.childContextTypes = propTypes, _class.propTypes = propTypes, _temp;
 };
-exports.ContextFactory = ContextFactory;
 //# sourceMappingURL=geiger.js.map
