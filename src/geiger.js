@@ -1,5 +1,6 @@
 'use strict';
 
+import { Component } from 'react';
 import { EventEmitter } from 'events';
 
 export class Action extends EventEmitter { }
@@ -76,7 +77,7 @@ export class Store extends EventEmitter {
 
 export const ContextFactory = (propTypes) => {
 
-    return class FactoriedContext {
+    return class FactoriedContext extends Component {
 
         static childContextTypes = propTypes;
         static propTypes = propTypes;

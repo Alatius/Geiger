@@ -1,31 +1,35 @@
 {
-  "name": "geiger",
-  "version": "1.0.4",
-  "description": "Tiny (<100 SLOC), no-dependencies Flux implementation with store synchronization (waitFor) and Dependency Injection features",
-  "main": "dist/geiger.js",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:babel/register --recursive"
-  },
-  "author": "Jérôme Schneider, Net Gusto <contact@netgusto.com>",
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
-    "babel-core": "5.3.3",
-    "babel-eslint": "3.1.1",
-    "babel-runtime": "5.3.3",
-    "eslint": "0.21.0",
-    "gulp": "3.8.11",
-    "gulp-util": "3.0.4",
-    "gulp-sourcemaps": "1.5.2",
-    "gulp-babel": "5.1.0",
-    "gulp-eslint": "0.12.0",
-    "gulp-print": "1.1.0",
-    "babel": "^5.2.17",
-    "chai": "^2.3.0",
-    "jsdom": "^3.1.2",
-    "mocha": "^2.2.4",
-    "react-tools": "^0.13.2",
-    "jquery": "^2.1.4",
-    "react": "^0.13.2"
-  }
+    "name": "geiger",
+    "version": "1.0.4",
+    "description": "Tiny (<100 SLOC), no-dependencies Flux implementation with store synchronization (waitFor) and Dependency Injection features",
+    "main": "dist/geiger.js",
+    "scripts": {
+        "test": "./node_modules/.bin/mocha --compilers js:babel/register --recursive"
+    },
+    "author": "Jérôme Schneider, Net Gusto <contact@netgusto.com>",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "6.18.0",
+        "babel-core": "6.5.2",
+        "babel-eslint": "7.1.1",
+        "babel-plugin-transform-class-properties": "^6.19.0",
+        "babel-preset-es2015": "^6.18.0",
+        "babel-preset-react": "^6.16.0",
+        "babel-preset-stage-0": "^6.16.0",
+        "babel-runtime": "5.3.3",
+        "chai": "^2.3.0",
+        "eslint": "0.21.0",
+        "gulp": "3.9.0",
+        "gulp-babel": "6.1.2",
+        "gulp-eslint": "0.12.0",
+        "gulp-print": "1.1.0",
+        "gulp-sourcemaps": "1.5.2",
+        "gulp-util": "3.0.4",
+        "jquery": "^2.1.4",
+        "jsdom": "^3.1.2",
+        "mocha": "^2.2.4",
+        "react": "15.3.2",
+        "react-tools": "^0.13.2"
+    }
 }
